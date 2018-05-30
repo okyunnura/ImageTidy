@@ -1,0 +1,1 @@
+Imagetidy.go path="{iOS images path}"
