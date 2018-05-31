@@ -1,1 +1,1 @@
-Imagetidy.go path="{iOS images path}"
+go run ImageTidy.go -path="{iOS images path}"

@@ -27,9 +27,9 @@ func main() {
 	//tmp dir create
 	root, _ := os.Getwd()
 	tmpDir := root + "/tmp/"
-	hdpiDir := tmpDir + "/hdpi/"
-	xhdpiDir := tmpDir + "/xhdpi/"
-	xxhdpiDir := tmpDir + "/xxhdpi/"
+	hdpiDir := tmpDir + "/drawable-hdpi/"
+	xhdpiDir := tmpDir + "/drawable-xhdpi/"
+	xxhdpiDir := tmpDir + "/drawable-xxhdpi/"
 
 	if err := os.RemoveAll(tmpDir); err != nil {
 		log.Println("error: tmpDir dir not deleted")
@@ -63,7 +63,7 @@ func main() {
 		}
 
 		if !info.IsDir() {
-			infoName := strings.Replace(info.Name(), "-", "_", -1)
+			infoName := rename(info.Name())
 
 			var dstPath string
 			if strings.Contains(infoName, "@1x") {
@@ -104,5 +104,13 @@ func main() {
 	if err != nil {
 		log.Fatalln("Error on filepath.Walk : ", err)
 	}
+}
 
+func rename(value string) string {
+	var result = value
+	result = strings.Replace(result, "-", "_", -1)
+	result = strings.Replace(result, "ON", "_on", -1)
+	result = strings.Replace(result, "NAVI", "_navi", -1)
+	result = strings.ToLower(result)
+	return result
 }
